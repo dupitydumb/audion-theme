@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audion Themes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --border: #e0e0e0;
+    --text: #1a1a1a;
+    --text-sub: #6b6b6b;
+    --accent: #6c63ff;
+    --accent-hover: #5a52d5;
+    --badge: #f0f0f0;
+    --badge-text: #444;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111113;
+      --surface: #1c1c1e;
+      --border: #2c2c2e;
+      --text: #f0f0f0;
+      --text-sub: #888;
+      --badge: #2c2c2e;
+      --badge-text: #aaa;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111113;
+    --surface: #1c1c1e;
+    --border: #2c2c2e;
+    --text: #f0f0f0;
+    --text-sub: #888;
+    --badge: #2c2c2e;
+    --badge-text: #aaa;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 0 24px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: grid; place-items: center;
+  }
+  .logo-mark svg { fill: #fff; }
+  h1 { margin: 0; font-size: 1.25rem; font-weight: 600; color: var(--text); }
+  .header-sub { color: var(--text-sub); font-size: 0.875rem; }
+
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { background: var(--badge); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 0 80px;
+  }
+
+  .toolbar {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .search {
+    flex: 1;
+    min-width: 200px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .search:focus { border-color: var(--accent); }
+  .count { color: var(--text-sub); font-size: 0.875rem; white-space: nowrap; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.15s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+
+  .card-swatch {
+    height: 64px;
+    display: flex;
+  }
+  .swatch-seg { flex: 1; }
+
+  .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .card-name { font-weight: 600; font-size: 1rem; }
+  .card-author { font-size: 0.8rem; color: var(--text-sub); }
+  .card-desc { font-size: 0.875rem; color: var(--text-sub); margin-top: 4px; flex: 1; }
+
+  .card-accent-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 1px;
+  }
+
+  .card-actions {
+    display: flex; gap: 8px;
+    padding: 12px 16px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .btn-sm {
+    flex: 1;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    border-radius: 7px;
+    text-align: center;
+  }
+  .btn-copy {
+    background: var(--badge);
+    color: var(--badge-text);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .btn-copy:hover { background: var(--border); }
+  .btn-install {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .btn-install:hover { background: var(--accent-hover); }
+
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-sub);
+  }
+  .empty-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+  .loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-sub);
+  }
+  .spinner {
+    width: 28px; height: 28px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-box {
+    background: #fff0f0;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 20px;
+    color: #b91c1c;
+    text-align: center;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .error-box { background: #2a1515; border-color: #7f1d1d; color: #fca5a5; }
+  }
+  :root[data-theme="dark"] .error-box { background: #2a1515; border-color: #7f1d1d; color: #fca5a5; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #222;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 99px;
+    font-size: 0.875rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.25s, opacity 0.25s;
+    z-index: 999;
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18">
+        <circle cx="9" cy="9" r="7" fill="none" stroke="#fff" stroke-width="2"/>
+        <circle cx="9" cy="9" r="3"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Audion Themes</h1>
+      <div class="header-sub">Community theme gallery</div>
+    </div>
+  </a>
+  <div class="header-actions">
+    <a class="btn btn-outline" href="submit.html">Submit a theme</a>
+  </div>
+</header>
+
+<main>
+  <div class="toolbar">
+    <input class="search" type="search" placeholder="Search themes…" id="search" aria-label="Search themes">
+    <span class="count" id="count"></span>
+  </div>
+
+  <div id="root">
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading themes…
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const INDEX_URL = 'https://raw.githubusercontent.com/dupitydumb/audion-theme/main/index.json';
+const RAW_BASE  = 'https://raw.githubusercontent.com/dupitydumb/audion-theme/main/';
+
+let allThemes = [];
+
+async function loadIndex() {
+  const res = await fetch(INDEX_URL);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+function rawUrl(file) { return RAW_BASE + file; }
+
+function swatchHtml(colors) {
+  return colors.map(c => `<div class="swatch-seg" style="background:${c}"></div>`).join('');
+}
+
+function cardHtml(t) {
+  const raw = rawUrl(t.file);
+  const encoded = encodeURIComponent(raw);
+  return `
+    <div class="card" data-name="${t.name.toLowerCase()}" data-author="${(t.author||'').toLowerCase()}">
+      <div class="card-swatch">${swatchHtml(t.previewColors || [t.accentColor,'#222','#eee'])}</div>
+      <div class="card-body">
+        <div class="card-name">
+          <span class="card-accent-dot" style="background:${t.accentColor}"></span>${t.name}
+        </div>
+        <div class="card-author">by ${t.author || 'unknown'}</div>
+        <div class="card-desc">${t.description || ''}</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-sm btn-copy" onclick="copyUrl('${raw}', this)">Copy URL</button>
+        <a class="btn btn-sm btn-install" href="audion://install-theme?url=${encoded}">Install in Audion</a>
+      </div>
+    </div>`;
+}
+
+function renderGrid(themes) {
+  const root = document.getElementById('root');
+  const count = document.getElementById('count');
+  if (!themes.length) {
+    root.innerHTML = '<div class="grid"><div class="empty"><div class="empty-icon">🎨</div>No themes found.</div></div>';
+    count.textContent = '0 themes';
+    return;
+  }
+  root.innerHTML = `<div class="grid">${themes.map(cardHtml).join('')}</div>`;
+  count.textContent = `${themes.length} theme${themes.length === 1 ? '' : 's'}`;
+}
+
+function filterThemes(q) {
+  if (!q) return allThemes;
+  const lq = q.toLowerCase();
+  return allThemes.filter(t =>
+    t.name.toLowerCase().includes(lq) ||
+    (t.author || '').toLowerCase().includes(lq) ||
+    (t.description || '').toLowerCase().includes(lq)
+  );
+}
+
+document.getElementById('search').addEventListener('input', e => {
+  renderGrid(filterThemes(e.target.value.trim()));
+});
+
+async function copyUrl(url, btn) {
+  try {
+    await navigator.clipboard.writeText(url);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  } catch {
+    // fallback: select text
+    const inp = document.createElement('input');
+    inp.value = url;
+    document.body.appendChild(inp);
+    inp.select();
+    document.execCommand('copy');
+    document.body.removeChild(inp);
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+loadIndex().then(data => {
+  allThemes = data.themes || [];
+  renderGrid(allThemes);
+}).catch(err => {
+  document.getElementById('root').innerHTML =
+    `<div class="error-box">Failed to load themes: ${err.message}<br><br>
+     <small>Fetch from raw.githubusercontent.com failed. Try again later or check your connection.</small></div>`;
+});
+</script>
+</body>
+</html>

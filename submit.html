@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit Theme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --border: #e0e0e0;
+    --text: #1a1a1a;
+    --text-sub: #6b6b6b;
+    --accent: #6c63ff;
+    --accent-hover: #5a52d5;
+    --badge: #f0f0f0;
+    --badge-text: #444;
+    --err: #b91c1c;
+    --err-bg: #fff0f0;
+    --ok-bg: #f0fdf4;
+    --ok: #166534;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111113;
+      --surface: #1c1c1e;
+      --border: #2c2c2e;
+      --text: #f0f0f0;
+      --text-sub: #888;
+      --badge: #2c2c2e;
+      --badge-text: #aaa;
+      --err-bg: #2a1515;
+      --err: #fca5a5;
+      --ok-bg: #052e16;
+      --ok: #86efac;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111113;
+    --surface: #1c1c1e;
+    --border: #2c2c2e;
+    --text: #f0f0f0;
+    --text-sub: #888;
+    --badge: #2c2c2e;
+    --badge-text: #aaa;
+    --err-bg: #2a1515;
+    --err: #fca5a5;
+    --ok-bg: #052e16;
+    --ok: #86efac;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 0 24px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  a.back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  a.back:hover { color: var(--text); }
+  h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 0 80px;
+  }
+
+  .info-box {
+    background: var(--badge);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.875rem;
+    color: var(--text-sub);
+    margin-bottom: 28px;
+  }
+  .info-box strong { color: var(--text); }
+
+  fieldset {
+    border: none;
+    padding: 0; margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  legend { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; padding: 0; }
+
+  label { display: flex; flex-direction: column; gap: 5px; font-size: 0.875rem; font-weight: 500; }
+  label span { color: var(--text-sub); font-weight: 400; font-size: 0.8rem; }
+
+  input[type="text"], textarea {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+  input[type="text"]:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 160px; font-size: 0.82rem; font-family: 'Consolas', 'Fira Mono', monospace; }
+
+  .file-row {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .btn-file {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--badge);
+    color: var(--badge-text);
+    font-family: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-file:hover { background: var(--border); }
+  .file-name { font-size: 0.82rem; color: var(--text-sub); }
+
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text-sub); font-size: 0.8rem;
+    margin: 8px 0;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: var(--border);
+  }
+
+  .preview-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 24px;
+    display: none;
+    gap: 12px;
+    align-items: center;
+  }
+  .preview-box.visible { display: flex; }
+  .swatch-strip { display: flex; border-radius: 6px; overflow: hidden; width: 60px; height: 36px; flex-shrink: 0; }
+  .swatch-seg { flex: 1; }
+  .preview-info { flex: 1; }
+  .preview-name { font-weight: 600; }
+  .preview-author { font-size: 0.82rem; color: var(--text-sub); }
+
+  .err-msg { color: var(--err); font-size: 0.82rem; margin-top: 4px; }
+
+  .ok-box {
+    background: var(--ok-bg);
+    border: 1px solid var(--ok);
+    color: var(--ok);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .ok-box.visible { display: block; }
+
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; border: none; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { background: var(--badge); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Submit a Theme</h1>
+  </div>
+  <a class="back" href="index.html">← Back to gallery</a>
+</header>
+
+<main>
+  <div class="info-box">
+    <strong>How it works:</strong> Fill in the form below. When you click <em>Submit via GitHub</em>, a new tab opens with a pre-filled GitHub file editor — just click <em>Propose new file</em> to open a pull request. A maintainer will review and merge it.
+  </div>
+
+  <fieldset>
+    <legend>Theme metadata</legend>
+    <label>
+      Theme name *
+      <input type="text" id="pkg-name" placeholder="e.g. Dracula" maxlength="80">
+    </label>
+    <label>
+      Author (your GitHub username or name)
+      <input type="text" id="pkg-author" placeholder="e.g. yourusername" maxlength="80">
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Theme file</legend>
+    <div class="file-row">
+      <button class="btn-file" type="button" id="file-btn">Upload .audiotheme file</button>
+      <span class="file-name" id="file-name">No file chosen</span>
+    </div>
+    <input type="file" id="file-input" accept=".audiotheme,application/json" style="display:none">
+
+    <div class="divider">or paste JSON</div>
+
+    <label>
+      Paste .audiotheme JSON *
+      <span>Must be valid AudioTheme v1 format</span>
+      <textarea id="pkg-json" placeholder='{"version":1,"name":"My Theme","accentColor":"#ff6b6b",...}'></textarea>
+    </label>
+    <div class="err-msg" id="err-msg"></div>
+  </fieldset>
+
+  <div class="preview-box" id="preview-box">
+    <div class="swatch-strip" id="swatch-strip"></div>
+    <div class="preview-info">
+      <div class="preview-name" id="prev-name"></div>
+      <div class="preview-author" id="prev-author"></div>
+    </div>
+  </div>
+
+  <div class="ok-box" id="ok-box">
+    ✓ Theme JSON is valid. Click <strong>Submit via GitHub</strong> to open a PR.
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="submit-btn" disabled>Submit via GitHub</button>
+    <a class="btn btn-outline" href="index.html">Cancel</a>
+  </div>
+</main>
+
+<script>
+let parsedPackage = null;
+
+function isHex(s) { return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(s); }
+
+const VALID_BG     = ['none','color','gradient','image','video'];
+const VALID_TRANS  = ['fade','slide','scale','none'];
+const VALID_VIZ    = ['bars','wave','blur-pulse','none'];
+const VALID_SPEED  = ['slow','normal','fast'];
+
+function parseThemePackage(raw) {
+  if (!raw || typeof raw !== 'object') throw 'Not an object';
+  if (raw.version !== 1) throw 'version must be 1';
+  if (!raw.name || typeof raw.name !== 'string') throw 'name required';
+  if (!isHex(raw.accentColor)) throw 'accentColor must be a hex color';
+
+  const cc = raw.customColors || {};
+  const bg = raw.background   || {};
+  const an = raw.animation    || {};
+
+  if (bg.type && !VALID_BG.includes(bg.type))       throw `background.type must be one of: ${VALID_BG.join(', ')}`;
+  if (an.pageTransition && !VALID_TRANS.includes(an.pageTransition)) throw `animation.pageTransition must be one of: ${VALID_TRANS.join(', ')}`;
+  if (an.playerVisualization && !VALID_VIZ.includes(an.playerVisualization)) throw `animation.playerVisualization must be one of: ${VALID_VIZ.join(', ')}`;
+  if (an.transitionSpeed && !VALID_SPEED.includes(an.transitionSpeed)) throw `animation.transitionSpeed must be one of: ${VALID_SPEED.join(', ')}`;
+
+  // strip machine-local paths
+  const safeBgType = (bg.type === 'image' || bg.type === 'video') ? 'none' : (bg.type || 'none');
+  const safeBgVal  = (bg.type === 'image' || bg.type === 'video') ? '' : (bg.value || '');
+
+  return {
+    version: 1,
+    name: String(raw.name).trim(),
+    author: raw.author ? String(raw.author).trim() : undefined,
+    description: raw.description ? String(raw.description).trim() : undefined,
+    accentColor: raw.accentColor,
+    mode: raw.mode || undefined,
+    customColors: cc,
+    background: { ...bg, type: safeBgType, value: safeBgVal },
+    animation: { ...an }
+  };
+}
+
+function slugify(name) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function swatchColors(pkg) {
+  return [
+    pkg.customColors?.bgBase || '#222222',
+    pkg.accentColor,
+    pkg.customColors?.textPrimary || '#eeeeee'
+  ];
+}
+
+function showPreview(pkg) {
+  const colors = swatchColors(pkg);
+  document.getElementById('swatch-strip').innerHTML =
+    colors.map(c => `<div class="swatch-seg" style="background:${c}"></div>`).join('');
+  document.getElementById('prev-name').textContent = pkg.name;
+  document.getElementById('prev-author').textContent = pkg.author ? `by ${pkg.author}` : '';
+  document.getElementById('preview-box').classList.add('visible');
+}
+
+function validateJson(text) {
+  const errEl = document.getElementById('err-msg');
+  const okEl  = document.getElementById('ok-box');
+  const btn   = document.getElementById('submit-btn');
+
+  errEl.textContent = '';
+  okEl.classList.remove('visible');
+  parsedPackage = null;
+  btn.disabled = true;
+  document.getElementById('preview-box').classList.remove('visible');
+
+  if (!text.trim()) return;
+
+  let raw;
+  try { raw = JSON.parse(text); }
+  catch (e) { errEl.textContent = `Invalid JSON: ${e.message}`; return; }
+
+  try {
+    const pkg = parseThemePackage(raw);
+    // merge form name/author if fields filled
+    const nameField  = document.getElementById('pkg-name').value.trim();
+    const authorField = document.getElementById('pkg-author').value.trim();
+    if (nameField)   pkg.name   = nameField;
+    if (authorField) pkg.author = authorField;
+
+    parsedPackage = pkg;
+    showPreview(pkg);
+    okEl.classList.add('visible');
+    btn.disabled = false;
+  } catch (e) {
+    errEl.textContent = `Validation error: ${e}`;
+  }
+}
+
+document.getElementById('pkg-json').addEventListener('input', e => validateJson(e.target.value));
+
+// file upload
+document.getElementById('file-btn').addEventListener('click', () => {
+  document.getElementById('file-input').click();
+});
+document.getElementById('file-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  document.getElementById('file-name').textContent = file.name;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const ta = document.getElementById('pkg-json');
+    ta.value = ev.target.result;
+    validateJson(ev.target.result);
+  };
+  reader.readAsText(file);
+});
+
+// re-validate when name/author change
+['pkg-name','pkg-author'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    validateJson(document.getElementById('pkg-json').value);
+  });
+});
+
+document.getElementById('submit-btn').addEventListener('click', () => {
+  if (!parsedPackage) return;
+
+  const slug     = slugify(parsedPackage.name);
+  const filename = `themes/${slug}.audiotheme`;
+  const value    = JSON.stringify(parsedPackage, null, 2);
+  const url = `https://github.com/dupitydumb/audion-theme/new/main?filename=${encodeURIComponent(filename)}&value=${encodeURIComponent(value)}`;
+  window.open(url, '_blank');
+});
+</script>
+</body>
+</html>

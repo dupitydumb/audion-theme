@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "themes": [
+    {
+      "id": "nord",
+      "file": "themes/nord.audiotheme",
+      "name": "Nord",
+      "author": "dupitydumb",
+      "description": "Arctic, north-bluish color palette. Clean and elegant dark theme.",
+      "accentColor": "#88c0d0",
+      "previewColors": ["#2e3440", "#88c0d0", "#eceff4"]
+    },
+    {
+      "id": "catppuccin-mocha",
+      "file": "themes/catppuccin-mocha.audiotheme",
+      "name": "Catppuccin Mocha",
+      "author": "dupitydumb",
+      "description": "Soothing pastel theme for the high-spirited. Warm dark tones with lavender accents.",
+      "accentColor": "#cba6f7",
+      "previewColors": ["#1e1e2e", "#cba6f7", "#cdd6f4"]
+    },
+    {
+      "id": "gruvbox",
+      "file": "themes/gruvbox.audiotheme",
+      "name": "Gruvbox",
+      "author": "dupitydumb",
+      "description": "Retro groove color scheme. Warm earthy tones with high contrast.",
+      "accentColor": "#fabd2f",
+      "previewColors": ["#282828", "#fabd2f", "#ebdbb2"]
+    }
+  ]
+}

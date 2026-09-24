@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "name": "Gruvbox",
+  "author": "dupitydumb",
+  "description": "Retro groove color scheme. Warm earthy tones with high contrast.",
+  "accentColor": "#fabd2f",
+  "mode": "dark",
+  "customColors": {
+    "bgBase": "#282828",
+    "bgElevated": "#3c3836",
+    "bgSurface": "#504945",
+    "bgHighlight": "#665c54",
+    "textPrimary": "#ebdbb2",
+    "textSecondary": "#d5c4a1",
+    "textSubdued": "#928374",
+    "borderColor": "#504945",
+    "sidebarBg": "#1d2021",
+    "playerBg": "#3c3836"
+  },
+  "background": {
+    "type": "none",
+    "value": "",
+    "opacity": 1,
+    "blur": 0,
+    "fixed": false
+  },
+  "animation": {
+    "reducedMotion": false,
+    "pageTransition": "slide",
+    "playerVisualization": "bars",
+    "hoverScale": true,
+    "accentPulse": false,
+    "transitionSpeed": "fast"
+  }
+}

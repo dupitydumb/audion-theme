@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "name": "Catppuccin Mocha",
+  "author": "dupitydumb",
+  "description": "Soothing pastel theme for the high-spirited. Warm dark tones with lavender accents.",
+  "accentColor": "#cba6f7",
+  "mode": "dark",
+  "customColors": {
+    "bgBase": "#1e1e2e",
+    "bgElevated": "#313244",
+    "bgSurface": "#45475a",
+    "bgHighlight": "#585b70",
+    "textPrimary": "#cdd6f4",
+    "textSecondary": "#bac2de",
+    "textSubdued": "#9399b2",
+    "borderColor": "#45475a",
+    "sidebarBg": "#181825",
+    "playerBg": "#313244"
+  },
+  "background": {
+    "type": "gradient",
+    "value": "linear-gradient(135deg, #1e1e2e 0%, #24273a 100%)",
+    "opacity": 1,
+    "blur": 0,
+    "fixed": false
+  },
+  "animation": {
+    "reducedMotion": false,
+    "pageTransition": "fade",
+    "playerVisualization": "wave",
+    "hoverScale": true,
+    "accentPulse": true,
+    "transitionSpeed": "normal"
+  }
+}
