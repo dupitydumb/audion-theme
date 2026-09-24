@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "name": "Cyber Matrix",
+  "author": "dupitydumb",
+  "description": "Futuristic neon-green cyberpunk terminal featuring authentic falling digital code streams.",
+  "accentColor": "#22c55e",
+  "mode": "dark",
+  "customColors": {
+    "bgBase": "#050a06",
+    "bgElevated": "#0a130b",
+    "bgSurface": "#0e1a0f",
+    "bgHighlight": "#162b18",
+    "textPrimary": "#86efac",
+    "textSecondary": "#4ade80",
+    "textSubdued": "#16a34a",
+    "borderColor": "#14532d",
+    "sidebarBg": "#030704",
+    "playerBg": "#060e07"
+  },
+  "background": {
+    "type": "gradient",
+    "value": "linear-gradient(180deg, #050a06 0%, #081209 100%)",
+    "opacity": 1,
+    "blur": 0,
+    "fixed": true
+  },
+  "animation": {
+    "reducedMotion": false,
+    "pageTransition": "fade",
+    "playerVisualization": "bars",
+    "hoverScale": true,
+    "accentPulse": true,
+    "transitionSpeed": "fast"
+  },
+  "customJs": "const chars = '0123456789ABCDEFｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ';\nconst fontSize = 14;\nlet cols = Math.floor(canvas.width / fontSize);\nlet ypos = Array(cols).fill(0).map(() => Math.random() * -100);\nlet animId;\nlet lastTime = 0;\nfunction render(time) {\n  if (time - lastTime > 45) {\n    lastTime = time;\n    ctx.fillStyle = 'rgba(5, 10, 6, 0.08)';\n    ctx.fillRect(0, 0, canvas.width, canvas.height);\n    ctx.fillStyle = '#22c55e';\n    ctx.font = `${fontSize}px monospace`;\n    ypos.forEach((y, i) => {\n      const char = chars.charAt(Math.floor(Math.random() * chars.length));\n      const x = i * fontSize;\n      ctx.fillText(char, x, y);\n      if (y > canvas.height + Math.random() * 8000) ypos[i] = 0;\n      else ypos[i] = y + fontSize;\n    });\n  }\n  animId = requestAnimationFrame(render);\n}\nanimId = requestAnimationFrame(render);\nreturn () => cancelAnimationFrame(animId);"
+}

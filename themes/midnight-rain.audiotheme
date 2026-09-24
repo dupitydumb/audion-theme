@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "name": "Midnight Rain",
+  "author": "dupitydumb",
+  "description": "Moody deep blue ambiance with a soothing animated rainfall effect.",
+  "accentColor": "#38bdf8",
+  "mode": "dark",
+  "customColors": {
+    "bgBase": "#0b0f19",
+    "bgElevated": "#111827",
+    "bgSurface": "#1f2937",
+    "bgHighlight": "#374151",
+    "textPrimary": "#f9fafb",
+    "textSecondary": "#9ca3af",
+    "textSubdued": "#64748b",
+    "borderColor": "#1f2937",
+    "sidebarBg": "#090d16",
+    "playerBg": "#0d1322"
+  },
+  "background": {
+    "type": "gradient",
+    "value": "linear-gradient(180deg, #0b0f19 0%, #0d1527 50%, #080c14 100%)",
+    "opacity": 1,
+    "blur": 0,
+    "fixed": true
+  },
+  "animation": {
+    "reducedMotion": false,
+    "pageTransition": "fade",
+    "playerVisualization": "bars",
+    "hoverScale": true,
+    "accentPulse": true,
+    "transitionSpeed": "normal"
+  },
+  "customJs": "const count = 120;\nconst drops = Array.from({ length: count }, () => ({\n  x: Math.random() * canvas.width,\n  y: Math.random() * canvas.height,\n  len: Math.random() * 20 + 10,\n  speed: Math.random() * 8 + 12,\n  opacity: Math.random() * 0.35 + 0.1\n}));\nlet animId;\nfunction render() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  ctx.lineWidth = 1.2;\n  ctx.lineCap = 'round';\n  for (const d of drops) {\n    d.y += d.speed;\n    d.x -= 1.2;\n    if (d.y > canvas.height) {\n      d.y = -d.len;\n      d.x = Math.random() * (canvas.width + 100);\n    }\n    ctx.strokeStyle = `rgba(56, 189, 248, ${d.opacity})`;\n    ctx.beginPath();\n    ctx.moveTo(d.x, d.y);\n    ctx.lineTo(d.x - 2, d.y + d.len);\n    ctx.stroke();\n  }\n  animId = requestAnimationFrame(render);\n}\nrender();\nreturn () => cancelAnimationFrame(animId);"
+}
