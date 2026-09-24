@@ -140,11 +140,117 @@
   }
   .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
 
-  .card-swatch {
-    height: 64px;
-    display: flex;
+  .card-mockup {
+    height: 95px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    grid-template-rows: 1fr 22px;
+    overflow: hidden;
   }
-  .swatch-seg { flex: 1; }
+  .mock-sidebar {
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-top: 8px;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  .mock-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .mock-line-sm {
+    width: 22px; height: 3px;
+    border-radius: 2px;
+  }
+  .mock-main {
+    grid-row: 1;
+    grid-column: 2;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+  }
+  .mock-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mock-line-md {
+    width: 36px; height: 4px;
+    border-radius: 2px;
+  }
+  .mock-fx-badge {
+    font-size: 8px;
+    line-height: 1;
+    padding: 1px 4px;
+    border-radius: 3px;
+    border: 1px solid;
+    font-weight: 700;
+  }
+  .mock-content {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+  }
+  .mock-card {
+    flex: 1;
+    border-radius: 4px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+  }
+  .mock-card-accent {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .mock-player {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .mock-track {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .mock-thumb {
+    width: 12px; height: 12px;
+    border-radius: 2px;
+  }
+  .mock-title {
+    width: 20px; height: 3px;
+    border-radius: 1px;
+  }
+  .mock-playbtn {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .mock-progress {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .mock-progress-bar {
+    height: 100%;
+    border-radius: 2px;
+  }
 
   .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
   .card-name { font-weight: 600; font-size: 1rem; }
@@ -299,8 +405,44 @@ async function loadIndex() {
 
 function rawUrl(file) { return RAW_BASE + file; }
 
-function swatchHtml(colors) {
-  return colors.map(c => `<div class="swatch-seg" style="background:${c}"></div>`).join('');
+function mockupHtml(t) {
+  const colors = t.previewColors || [t.accentColor, '#181818', t.accentColor, '#f0f0f0'];
+  const bgBase = colors[0] || '#181818';
+  const sidebarBg = colors[1] || '#101010';
+  const accent = t.accentColor;
+  const textPrimary = colors[3] || '#f0f0f0';
+
+  return `
+    <div class="card-mockup" style="background: ${bgBase};">
+      <div class="mock-sidebar" style="background: ${sidebarBg};">
+        <div class="mock-dot" style="background: ${accent};"></div>
+        <div class="mock-line-sm" style="background: ${textPrimary}; opacity: 0.35;"></div>
+        <div class="mock-line-sm" style="background: ${textPrimary}; opacity: 0.2;"></div>
+      </div>
+      <div class="mock-main">
+        <div class="mock-topbar">
+          <div class="mock-line-md" style="background: ${textPrimary}; opacity: 0.7;"></div>
+          ${t.hasEffect ? `<span class="mock-fx-badge" style="color: ${accent}; border-color: ${accent};">FX</span>` : ''}
+        </div>
+        <div class="mock-content">
+          <div class="mock-card" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.08);">
+            <div class="mock-card-accent" style="background: ${accent};"></div>
+          </div>
+          <div class="mock-card" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06);"></div>
+        </div>
+      </div>
+      <div class="mock-player" style="background: ${sidebarBg};">
+        <div class="mock-track">
+          <div class="mock-thumb" style="background: ${accent};"></div>
+          <div class="mock-title" style="background: ${textPrimary}; opacity: 0.5;"></div>
+        </div>
+        <div class="mock-playbtn" style="background: ${accent};"></div>
+        <div class="mock-progress" style="background: rgba(255,255,255,0.15);">
+          <div class="mock-progress-bar" style="background: ${accent}; width: 45%;"></div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function cardHtml(t) {
@@ -308,10 +450,11 @@ function cardHtml(t) {
   const encoded = encodeURIComponent(raw);
   return `
     <div class="card" data-name="${t.name.toLowerCase()}" data-author="${(t.author||'').toLowerCase()}">
-      <div class="card-swatch">${swatchHtml(t.previewColors || [t.accentColor,'#222','#eee'])}</div>
+      ${mockupHtml(t)}
       <div class="card-body">
         <div class="card-name">
           <span class="card-accent-dot" style="background:${t.accentColor}"></span>${t.name}
+          ${t.hasEffect ? '<span style="font-size:0.7rem;font-weight:600;padding:1px 6px;border-radius:4px;background:var(--badge);border:1px solid var(--border);color:var(--text-sub);margin-left:6px;vertical-align:middle;">Effect</span>' : ''}
         </div>
         <div class="card-author">by ${t.author || 'unknown'}</div>
         <div class="card-desc">${t.description || ''}</div>

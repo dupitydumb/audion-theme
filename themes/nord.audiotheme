@@ -2,27 +2,27 @@
   "version": 1,
   "name": "Nord",
   "author": "dupitydumb",
-  "description": "Arctic, north-bluish color palette. Clean and elegant dark theme.",
+  "description": "Arctic, north-bluish aurora palette with clean icy gradients and ambient aurora borealis glow.",
   "accentColor": "#88c0d0",
   "mode": "dark",
   "customColors": {
-    "bgBase": "#2e3440",
-    "bgElevated": "#3b4252",
-    "bgSurface": "#434c5e",
-    "bgHighlight": "#4c566a",
+    "bgBase": "#242933",
+    "bgElevated": "#2e3440",
+    "bgSurface": "#3b4252",
+    "bgHighlight": "#434c5e",
     "textPrimary": "#eceff4",
-    "textSecondary": "#d8dee9",
+    "textSecondary": "#e5e9f0",
     "textSubdued": "#81a1c1",
-    "borderColor": "#4c566a",
-    "sidebarBg": "#2e3440",
-    "playerBg": "#3b4252"
+    "borderColor": "#3b4252",
+    "sidebarBg": "#1e222a",
+    "playerBg": "#2e3440"
   },
   "background": {
-    "type": "none",
-    "value": "",
+    "type": "gradient",
+    "value": "radial-gradient(ellipse 90% 70% at 50% -15%, #3b4252 0%, #242933 65%, #1e222a 100%)",
     "opacity": 1,
     "blur": 0,
-    "fixed": false
+    "fixed": true
   },
   "animation": {
     "reducedMotion": false,
@@ -31,5 +31,6 @@
     "hoverScale": true,
     "accentPulse": true,
     "transitionSpeed": "normal"
-  }
+  },
+  "customJs": "let animId;\nlet t = 0;\nfunction render() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  t += 0.008;\n  const w = canvas.width;\n  const h = canvas.height * 0.45;\n  const grad = ctx.createLinearGradient(0, 0, w, h);\n  grad.addColorStop(0, 'rgba(136, 192, 208, 0.08)');\n  grad.addColorStop(0.5, 'rgba(143, 188, 187, 0.12)');\n  grad.addColorStop(1, 'rgba(129, 161, 193, 0)');\n  ctx.fillStyle = grad;\n  ctx.beginPath();\n  ctx.moveTo(0, 0);\n  for (let x = 0; x <= w; x += 30) {\n    const y = Math.sin(x * 0.004 + t) * 35 + Math.cos(x * 0.002 - t * 0.8) * 25 + 70;\n    ctx.lineTo(x, y);\n  }\n  ctx.lineTo(w, 0);\n  ctx.closePath();\n  ctx.fill();\n  animId = requestAnimationFrame(render);\n}\nrender();\nreturn () => cancelAnimationFrame(animId);"
 }

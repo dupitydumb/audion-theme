@@ -2,34 +2,35 @@
   "version": 1,
   "name": "Gruvbox",
   "author": "dupitydumb",
-  "description": "Retro groove color scheme. Warm earthy tones with high contrast.",
+  "description": "Retro groove warmth with high-contrast amber accents and subtle rising vinyl dust motes.",
   "accentColor": "#fabd2f",
   "mode": "dark",
   "customColors": {
-    "bgBase": "#282828",
-    "bgElevated": "#3c3836",
-    "bgSurface": "#504945",
-    "bgHighlight": "#665c54",
+    "bgBase": "#202020",
+    "bgElevated": "#282828",
+    "bgSurface": "#3c3836",
+    "bgHighlight": "#504945",
     "textPrimary": "#ebdbb2",
     "textSecondary": "#d5c4a1",
-    "textSubdued": "#928374",
-    "borderColor": "#504945",
-    "sidebarBg": "#1d2021",
-    "playerBg": "#3c3836"
+    "textSubdued": "#a89984",
+    "borderColor": "#3c3836",
+    "sidebarBg": "#191b1c",
+    "playerBg": "#242424"
   },
   "background": {
-    "type": "none",
-    "value": "",
+    "type": "gradient",
+    "value": "radial-gradient(ellipse 90% 70% at 20% 0%, #362e24 0%, #282828 55%, #191b1c 100%)",
     "opacity": 1,
     "blur": 0,
-    "fixed": false
+    "fixed": true
   },
   "animation": {
     "reducedMotion": false,
     "pageTransition": "slide",
     "playerVisualization": "bars",
     "hoverScale": true,
-    "accentPulse": false,
-    "transitionSpeed": "fast"
-  }
+    "accentPulse": true,
+    "transitionSpeed": "normal"
+  },
+  "customJs": "const count = 30;\nconst motes = Array.from({ length: count }, () => ({\n  x: Math.random() * canvas.width,\n  y: Math.random() * canvas.height,\n  r: Math.random() * 1.8 + 0.8,\n  speedY: Math.random() * 0.35 + 0.15,\n  sway: Math.random() * 0.02,\n  opacity: Math.random() * 0.35 + 0.1\n}));\nlet animId;\nlet t = 0;\nfunction render() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  t += 0.02;\n  for (const m of motes) {\n    m.y -= m.speedY;\n    m.x += Math.sin(t + m.y * 0.01) * 0.3;\n    if (m.y < -5) {\n      m.y = canvas.height + 5;\n      m.x = Math.random() * canvas.width;\n    }\n    ctx.fillStyle = `rgba(250, 189, 47, ${m.opacity})`;\n    ctx.beginPath();\n    ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);\n    ctx.fill();\n  }\n  animId = requestAnimationFrame(render);\n}\nrender();\nreturn () => cancelAnimationFrame(animId);"
 }

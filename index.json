@@ -6,27 +6,30 @@
       "file": "themes/nord.audiotheme",
       "name": "Nord",
       "author": "dupitydumb",
-      "description": "Arctic, north-bluish color palette. Clean and elegant dark theme.",
+      "description": "Arctic, north-bluish aurora palette with clean icy gradients and ambient aurora borealis glow.",
       "accentColor": "#88c0d0",
-      "previewColors": ["#2e3440", "#88c0d0", "#eceff4"]
+      "previewColors": ["#242933", "#1e222a", "#88c0d0", "#eceff4"],
+      "hasEffect": true
     },
     {
       "id": "catppuccin-mocha",
       "file": "themes/catppuccin-mocha.audiotheme",
       "name": "Catppuccin Mocha",
       "author": "dupitydumb",
-      "description": "Soothing pastel theme for the high-spirited. Warm dark tones with lavender accents.",
+      "description": "Soothing pastel theme for the high-spirited. Warm dark tones with gentle glowing lavender sparkles.",
       "accentColor": "#cba6f7",
-      "previewColors": ["#1e1e2e", "#cba6f7", "#cdd6f4"]
+      "previewColors": ["#181825", "#11111b", "#cba6f7", "#cdd6f4"],
+      "hasEffect": true
     },
     {
       "id": "gruvbox",
       "file": "themes/gruvbox.audiotheme",
       "name": "Gruvbox",
       "author": "dupitydumb",
-      "description": "Retro groove color scheme. Warm earthy tones with high contrast.",
+      "description": "Retro groove warmth with high-contrast amber accents and subtle rising vinyl dust motes.",
       "accentColor": "#fabd2f",
-      "previewColors": ["#282828", "#fabd2f", "#ebdbb2"]
+      "previewColors": ["#202020", "#191b1c", "#fabd2f", "#ebdbb2"],
+      "hasEffect": true
     },
     {
       "id": "liquid-glass",
@@ -35,7 +38,8 @@
       "author": "dupitydumb",
       "description": "Frosted glass aesthetic with translucent surfaces and gentle glowing orbs.",
       "accentColor": "#60a5fa",
-      "previewColors": ["#0d1117", "#60a5fa", "#f0f4ff"]
+      "previewColors": ["#0d1117", "#090d14", "#60a5fa", "#f0f4ff"],
+      "hasEffect": true
     },
     {
       "id": "midnight-rain",
@@ -44,7 +48,8 @@
       "author": "dupitydumb",
       "description": "Moody deep blue ambiance with a soothing animated rainfall effect.",
       "accentColor": "#38bdf8",
-      "previewColors": ["#0b0f19", "#38bdf8", "#f9fafb"]
+      "previewColors": ["#0b0f19", "#090d16", "#38bdf8", "#f9fafb"],
+      "hasEffect": true
     },
     {
       "id": "winter-frost",
@@ -53,7 +58,8 @@
       "author": "dupitydumb",
       "description": "Crisp icy palette with gentle falling snowflakes and soft winter glow.",
       "accentColor": "#a5f3fc",
-      "previewColors": ["#080e1a", "#a5f3fc", "#f0f9ff"]
+      "previewColors": ["#080e1a", "#060a12", "#a5f3fc", "#f0f9ff"],
+      "hasEffect": true
     },
     {
       "id": "cyber-matrix",
@@ -62,7 +68,8 @@
       "author": "dupitydumb",
       "description": "Futuristic neon-green cyberpunk terminal featuring authentic falling digital code streams.",
       "accentColor": "#22c55e",
-      "previewColors": ["#050a06", "#22c55e", "#86efac"]
+      "previewColors": ["#050a06", "#030704", "#22c55e", "#86efac"],
+      "hasEffect": true
     }
   ]
 }

@@ -2,27 +2,27 @@
   "version": 1,
   "name": "Catppuccin Mocha",
   "author": "dupitydumb",
-  "description": "Soothing pastel theme for the high-spirited. Warm dark tones with lavender accents.",
+  "description": "Soothing pastel theme for the high-spirited. Warm dark tones with gentle glowing lavender sparkles.",
   "accentColor": "#cba6f7",
   "mode": "dark",
   "customColors": {
-    "bgBase": "#1e1e2e",
-    "bgElevated": "#313244",
-    "bgSurface": "#45475a",
-    "bgHighlight": "#585b70",
+    "bgBase": "#181825",
+    "bgElevated": "#1e1e2e",
+    "bgSurface": "#313244",
+    "bgHighlight": "#45475a",
     "textPrimary": "#cdd6f4",
     "textSecondary": "#bac2de",
     "textSubdued": "#9399b2",
-    "borderColor": "#45475a",
-    "sidebarBg": "#181825",
-    "playerBg": "#313244"
+    "borderColor": "#313244",
+    "sidebarBg": "#11111b",
+    "playerBg": "#181825"
   },
   "background": {
     "type": "gradient",
-    "value": "linear-gradient(135deg, #1e1e2e 0%, #24273a 100%)",
+    "value": "radial-gradient(ellipse 80% 60% at 75% 20%, #29233b 0%, #1e1e2e 50%, #11111b 100%)",
     "opacity": 1,
     "blur": 0,
-    "fixed": false
+    "fixed": true
   },
   "animation": {
     "reducedMotion": false,
@@ -31,5 +31,6 @@
     "hoverScale": true,
     "accentPulse": true,
     "transitionSpeed": "normal"
-  }
+  },
+  "customJs": "const count = 35;\nconst particles = Array.from({ length: count }, () => ({\n  x: Math.random() * canvas.width,\n  y: Math.random() * canvas.height,\n  r: Math.random() * 2 + 1,\n  phase: Math.random() * Math.PI * 2,\n  speedY: (Math.random() - 0.5) * 0.25,\n  speedX: (Math.random() - 0.5) * 0.25\n}));\nlet animId;\nfunction render() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  for (const p of particles) {\n    p.x += p.speedX;\n    p.y += p.speedY;\n    p.phase += 0.03;\n    if (p.x < 0) p.x = canvas.width;\n    if (p.x > canvas.width) p.x = 0;\n    if (p.y < 0) p.y = canvas.height;\n    if (p.y > canvas.height) p.y = 0;\n    const alpha = (Math.sin(p.phase) * 0.5 + 0.5) * 0.4 + 0.1;\n    ctx.fillStyle = `rgba(203, 166, 247, ${alpha})`;\n    ctx.beginPath();\n    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);\n    ctx.fill();\n  }\n  animId = requestAnimationFrame(render);\n}\nrender();\nreturn () => cancelAnimationFrame(animId);"
 }
