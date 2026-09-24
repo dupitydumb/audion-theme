@@ -312,7 +312,8 @@ function parseThemePackage(raw) {
     mode: raw.mode || undefined,
     customColors: cc,
     background: { ...bg, type: safeBgType, value: safeBgVal },
-    animation: { ...an }
+    animation: { ...an },
+    customJs: typeof raw.customJs === 'string' && raw.customJs.trim() ? raw.customJs : undefined
   };
 }
 

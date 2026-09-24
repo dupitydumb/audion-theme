@@ -31,5 +31,6 @@
     "hoverScale": true,
     "accentPulse": true,
     "transitionSpeed": "slow"
-  }
+  },
+  "customJs": "const orbs = Array.from({ length: 18 }, () => ({\n  x: Math.random() * canvas.width,\n  y: Math.random() * canvas.height,\n  r: Math.random() * 80 + 40,\n  vx: (Math.random() - 0.5) * 0.4,\n  vy: (Math.random() - 0.5) * 0.4,\n  alpha: Math.random() * 0.12 + 0.04,\n  hue: Math.random() > 0.5 ? 210 : 260\n}));\nlet animId;\nfunction draw() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  for (const o of orbs) {\n    o.x += o.vx;\n    o.y += o.vy;\n    if (o.x < -o.r) o.x = canvas.width + o.r;\n    if (o.x > canvas.width + o.r) o.x = -o.r;\n    if (o.y < -o.r) o.y = canvas.height + o.r;\n    if (o.y > canvas.height + o.r) o.y = -o.r;\n    const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);\n    g.addColorStop(0, `hsla(${o.hue}, 90%, 65%, ${o.alpha})`);\n    g.addColorStop(0.6, `hsla(${o.hue}, 80%, 55%, ${o.alpha * 0.4})`);\n    g.addColorStop(1, 'transparent');\n    ctx.fillStyle = g;\n    ctx.beginPath();\n    ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);\n    ctx.fill();\n  }\n  animId = requestAnimationFrame(draw);\n}\ndraw();\nreturn () => cancelAnimationFrame(animId);"
 }
