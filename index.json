@@ -27,6 +27,15 @@
       "description": "Retro groove color scheme. Warm earthy tones with high contrast.",
       "accentColor": "#fabd2f",
       "previewColors": ["#282828", "#fabd2f", "#ebdbb2"]
+    },
+    {
+      "id": "liquid-glass",
+      "file": "themes/liquid-glass.audiotheme",
+      "name": "Liquid Glass",
+      "author": "dupitydumb",
+      "description": "Frosted glass aesthetic with translucent surfaces, soft light refractions, and liquid-smooth transitions.",
+      "accentColor": "#60a5fa",
+      "previewColors": ["#0d1117", "#60a5fa", "#f0f4ff"]
     }
   ]
 }

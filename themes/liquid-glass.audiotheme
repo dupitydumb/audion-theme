@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "name": "Liquid Glass",
+  "author": "dupitydumb",
+  "description": "Frosted glass aesthetic with translucent surfaces, soft light refractions, and liquid-smooth transitions.",
+  "accentColor": "#60a5fa",
+  "mode": "dark",
+  "customColors": {
+    "bgBase": "#0d1117",
+    "bgElevated": "#ffffff18",
+    "bgSurface": "#ffffff22",
+    "bgHighlight": "#ffffff30",
+    "textPrimary": "#f0f4ff",
+    "textSecondary": "#c8d6f0",
+    "textSubdued": "#7e99cc",
+    "borderColor": "#ffffff25",
+    "sidebarBg": "#0d111799",
+    "playerBg": "#0d1117bb"
+  },
+  "background": {
+    "type": "gradient",
+    "value": "linear-gradient(135deg, #0d1117 0%, #0f1f3d 30%, #1a0a2e 60%, #0d1117 100%)",
+    "opacity": 1,
+    "blur": 0,
+    "fixed": true
+  },
+  "animation": {
+    "reducedMotion": false,
+    "pageTransition": "fade",
+    "playerVisualization": "wave",
+    "hoverScale": true,
+    "accentPulse": true,
+    "transitionSpeed": "slow"
+  }
+}
